@@ -1,0 +1,100 @@
+server:
+  port: 8186
+
+# service register name
+spring:
+  application:
+    name: yu-gateway
+  redis:
+    database: 15
+    password: admin123456
+    timeout: 3000
+    sentinel:
+      master: mymaster
+      nodes: xx.xx.xx.xx:26379
+    jedis:
+      pool:
+        max-active: 5000 #最大连接数
+        max-idle: 30 #最大空闲连接数
+        min-idle: 5 #最小空闲连接数
+        max-wait: 3000  #获取连接最大等待时间 ms  #default -1
+
+zuul:
+ # request header sensitive，不透传到下游服务
+  sensitive-headers: Cookie,Set-Cookie,Authorization
+  host:
+    socket-timeout-millis: 60000
+    connect-timeout-millis: 10000
+
+logZuulExceptions : false
+
+# zuul动态路由
+#zuul:
+#  routes:
+#    users:
+#      path: /authserver/**
+#      serviceId: auth-service
+#      url: http://ip:port/getUser
+#      #接口前缀
+#      prefix: /api
+#      #调用接口时是否移除前缀
+#      stripPrefix: false
+
+api:
+  routes:
+    authserver:
+      serviceId: authserver
+
+swagger:
+  apps:
+    - authserver
+    - cloud-crm
+
+# 忽略鉴权url
+ignored:
+  urls:
+    - /api/**
+    - /**/prepareUpload
+    - /oss/permission/getMenuList/**
+    - /oss/user/regist
+    - /oss/common/**
+    - /druid/**
+    - /swagger-ui.html
+    - /swagger-resources/**
+    - /swagger/**
+    - /actuator/**
+    - /**/v2/api-docs
+    - /**/*.js
+    - /**/*.css
+    - /**/*.png
+    - /**/*.ico
+    - /test/**
+    - /crm/customer/followList/prepareUpload
+
+#断路器，如若超时，则自动熔断
+hystrix:
+  command:
+   default:
+    execution:
+      isolation:
+        thread:
+          timeoutInMilliseconds: 160000
+
+#ribbon:
+#  eureka:
+#    enabled: false
+
+ribbon:
+  ConnectTimeout: 3000
+  ReadTimeout: 50000
+
+# 负载策略
+#auth-service:
+#  ribbon:
+#    NIWSServerListClassName: com.netflix.loadbalancer.ConfigurationBasedServerList
+#    listOfServers: http://example1.com,http://example2.com
+#    ConnectTimeout: 1000
+#    ReadTimeout: 3000
+#    MaxTotalHttpConnections: 500
+#    MaxConnectionsPerHost: 100
+

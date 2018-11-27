@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.yuhan.ziyu.auth.dao.mapper.DepartmentMapper">
+
+    <select id="findDeptByParentId" resultType="org.yuhan.ziyu.auth.entity.Department">
+        SELECT t.id ,t.title,parent_id,parent_ids,is_parent,sort_order,area_name,
+        province,city,county FROM t_department t
+        WHERE del_flag = 0
+        <choose>
+            <!--仅作用于本人-->
+            <when test="dataScope == 8">
+                AND id= #{ownPartId}
+            </when>
+            <otherwise>
+                AND (FIND_IN_SET(#{ownPartId},parent_ids) OR id= #{ownPartId})
+                <if test="parentId != ''">
+                    AND parent_id = #{parentId}
+                </if>
+                ORDER BY sort_order
+            </otherwise>
+        </choose>
+    </select>
+</mapper>

@@ -1,0 +1,15 @@
+spring:
+ profiles:
+  active: dev
+
+---
+# Define dev env main zookeeper server path
+spring:
+ profiles: dev
+ cloud:
+  zookeeper:
+   connectString: xx.xx.xx.xx:2181
+
+feign:
+ httpclient:
+  enabled: true
