@@ -8,7 +8,7 @@ spring:
  profiles: dev
  cloud:
   zookeeper:
-   connectString: xx.xx.xx.xx:2181
+   connectString: 192.168.30.124:2181
 
 feign:
  httpclient:

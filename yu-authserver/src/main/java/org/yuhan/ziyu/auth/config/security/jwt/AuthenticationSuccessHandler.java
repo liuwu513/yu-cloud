@@ -17,7 +17,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.web.authentication.SavedRequestAwareAuthenticationSuccessHandler;
 import org.springframework.stereotype.Component;
-import org.yuhan.ziyu.base.authserver.AuthInfoDto;
+import org.yuhan.ziyu.base.authserver.dto.AuthInfoDto;
 import org.yuhan.ziyu.base.common.SecurityConstant;
 
 import javax.servlet.ServletException;

@@ -21,7 +21,7 @@ import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
-import org.yuhan.ziyu.base.authserver.AuthInfoDto;
+import org.yuhan.ziyu.base.authserver.dto.AuthInfoDto;
 import org.yuhan.ziyu.base.common.CommonConstant;
 
 import java.util.List;

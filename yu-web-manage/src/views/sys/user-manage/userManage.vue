@@ -165,6 +165,8 @@
 </template>
 
 <script>
+    import uploaderSingle from '../../main-components/vue-uploader/uploaderSingle.vue';
+
 import {
   initDepartment,
   loadDepartment,
@@ -176,8 +178,13 @@ import {
   disableUser,
   deleteUser
 } from "@/api/index";
+
+
 export default {
   name: "user-manage",
+  components: {
+      uploaderSingle
+  },
   data() {
     const validatePassword = (rule, value, callback) => {
       if (value.length < 6) {
@@ -195,6 +202,34 @@ export default {
       }
     };
     return {
+        options: {
+            target: '/oss/uploader/chunk',
+            testChunks: true,
+            simultaneousUploads: 1,
+            chunkSize: 10 * 1024 * 1024,
+            headers: this.accessToken
+            // checkChunkUploadedByResponse: function (chunk, message) {
+            //   let objMessage = {}
+            //   try {
+            //     objMessage = JSON.parse(message)
+            //   } catch (e) {
+            //   }
+            //   // fake response
+            //   // objMessage.uploaded_chunks = [2, 3, 4, 5, 6, 8, 10, 11, 12, 13, 17, 20, 21]
+            //   // check the chunk is uploaded
+            //   return (objMessage.uploaded_chunks || []).indexOf(chunk.offset + 1) >= 0
+            // }
+        },
+        attrs: {
+            accept: 'image/*'
+        },
+        statusText: {
+            success: '成功了',
+            error: '出错了',
+            uploading: '上传中',
+            paused: '暂停中',
+            waiting: '等待中'
+        },
       accessToken: {},
       loading: true,
       drop: false,
@@ -392,6 +427,31 @@ export default {
           width: 150
         },
         {
+          title: "上传头像",
+          key: "icon",
+          width: 350,
+          render: (h, params) => {
+            return h(uploaderSingle,{
+                props: {
+                    options: this.options,
+                    fileStatusText: this.statusText
+                },
+                attrs: {
+                    class: "uploader-example",
+                    ref: "uploader"
+                },
+                on: {
+                    fileComplete: () => {
+
+                    },
+                    complete: ()=>{
+
+                    }
+                }
+            });
+          }
+        },
+        {
           title: "操作",
           key: "action",
           width: 200,
@@ -515,6 +575,25 @@ export default {
     };
   },
   methods: {
+      // 上传完成
+      complete() {
+          console.log('complete', arguments)
+      },
+      // 一个根文件（文件夹）成功上传完成。
+      fileComplete() {
+          console.log('file complete', arguments)
+          const file = arguments[0].file;
+          axios.post('/boot/uploader/mergeFile', qs.stringify({
+              filename: file.name,
+              identifier: arguments[0].uniqueIdentifier,
+              totalSize: file.size,
+              type: file.type
+          })).then(function (response) {
+              console.log(response);
+          }).catch(function (error) {
+              console.log(error);
+          });
+      },
     init() {
       this.accessToken = {
         accessToken: this.getStore("accessToken")

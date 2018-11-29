@@ -3,7 +3,7 @@ package org.yuhan.ziyu.auth.base;
 import org.yuhan.ziyu.auth.entity.User;
 import org.yuhan.ziyu.auth.exception.OSSException;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.yuhan.ziyu.base.authserver.AuthInfoDto;
+import org.yuhan.ziyu.base.authserver.dto.AuthInfoDto;
 
 import java.util.Date;
 

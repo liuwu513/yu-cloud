@@ -16,7 +16,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.web.AuthenticationEntryPoint;
 import org.springframework.security.web.authentication.www.BasicAuthenticationFilter;
-import org.yuhan.ziyu.base.authserver.AuthInfoDto;
+import org.yuhan.ziyu.base.authserver.dto.AuthInfoDto;
 import org.yuhan.ziyu.base.common.SecurityConstant;
 
 import javax.servlet.FilterChain;

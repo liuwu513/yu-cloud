@@ -17,7 +17,7 @@ import org.springframework.security.web.access.intercept.FilterInvocationSecurit
 import org.springframework.stereotype.Component;
 import org.springframework.util.AntPathMatcher;
 import org.springframework.util.PathMatcher;
-import org.yuhan.ziyu.base.authserver.PermissionDto;
+import org.yuhan.ziyu.base.authserver.dto.PermissionDto;
 import org.yuhan.ziyu.base.common.AuthConstant;
 import org.yuhan.ziyu.base.common.CommonConstant;
 

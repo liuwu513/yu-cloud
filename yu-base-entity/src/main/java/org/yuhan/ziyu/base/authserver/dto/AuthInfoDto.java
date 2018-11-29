@@ -1,4 +1,4 @@
-package org.yuhan.ziyu.base.authserver;
+package org.yuhan.ziyu.base.authserver.dto;
 
 import lombok.Data;
 import lombok.ToString;

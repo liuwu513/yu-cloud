@@ -6,9 +6,9 @@ spring:
     name: authserver
   # 数据源
   datasource:
-    url: jdbc:mysql://xx.xx.xx.xx:3306/yu-ahthserver?useUnicode=true&characterEncoding=utf-8&useSSL=false
+    url: jdbc:mysql://192.168.30.128:3306/cloud-test?characterEncoding=utf-8&useSSL=false
     username: admin
-    # Jasypt加密 可到common-utils中找到JasyptUtil加解密工具类生成加密结果 格式为ENC(加密结果)
+    # Jasypt加密 可到common-utils中找到JasyptUtil加解密工具类生成加密结果 格式为ENC(加密结果) admin2017
     password: ENC(l0z1ubd4XprWmBrKjE/5/2iE7XjuD4fs)
     type: com.alibaba.druid.pool.DruidDataSource
     driverClassName: com.mysql.jdbc.Driver
@@ -27,6 +27,15 @@ spring:
         allow:
         # IP黑名单
         deny:
+  http:
+    servlet:
+      multipart:
+        enabled: true   # 启用http上传处理
+        max-file-size: 100MB # 设置单个文件的最大长度
+        max-request-size: 100MB # 设置最大的请求文件的大小
+        file-size-threshold: 1MB  # 当上传文件达到1MB的时候进行磁盘写入
+        location: /tmp  # 上传的临时目录
+
   jpa:
     show-sql: true
     # 自动生成表结构
@@ -40,7 +49,7 @@ spring:
     timeout: 3000
     sentinel:
       master: mymaster
-      nodes: xx.xx.xx.xx:26379
+      nodes: 192.168.31.166:26379
     jedis:
       pool:
         max-active: 5000 #最大连接数
@@ -96,6 +105,7 @@ ignored:
     - /oss/permission/getMenuList/**
     - /oss/user/regist
     - /oss/common/**
+    - /oss/uploader/**
     - /druid/**
     - /swagger-ui.html
     - /swagger-resources/**
@@ -158,6 +168,9 @@ logging:
   file: oss-logs/oss.log
   level:
     io.swagger.models.parameters.AbstractSerializableParameter: info
+
+prop:
+  upload-folder: E:\data\appdata\upload
 
 management:
   info:

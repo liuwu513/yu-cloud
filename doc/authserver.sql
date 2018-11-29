@@ -267,12 +267,8 @@ CREATE TABLE `t_department` (
 
 /*Data for the table `t_department` */
 
-insert  into `t_department`(`id`,`create_by`,`create_time`,`del_flag`,`update_
-by`,`update_time`,`parent_id`,`sort_order`,`status`,`title`,`is_parent`,`paren
-t_ids`,`area_code`,`area_name`,`province`,`city`,`county`) values
-('40322777781112832','',NULL,0,'682265633886208','2018-09-28 20:19:21','0','1.00',0,'总部',1,'',NULL,'云南省-天津市县-
-麒麟区','530000','530300','530302 '),('57701341782347776','',NULL,0,'682265633886208','2018-09-28
-20:35:13','40322777781112832','1.00',0,'技术部',1,',40322777781112832',NULL ,'天津市-天津市县-蓟县','120000','120200','120225');
+insert  into `t_department`(`id`,`create_by`,`create_time`,`del_flag`,`update_by`,`update_time`,`parent_id`,`sort_order`,`status`,`title`,`is_parent`,`parent_ids`,`area_code`,`area_name`,`province`,`city`,`county`) values
+('40322777781112832','',NULL,0,'682265633886208','2018-09-28 20:19:21','0','1.00',0,'总部',1,'',NULL,'云南省-天津市县-麒麟区','530000','530300','530302 ');
 
 /*Table structure for table `t_dict_data` */
 
@@ -483,6 +479,38 @@ CREATE TABLE `t_user_role` (
 /*Data for the table `t_user_role` */
 
 insert  into `t_user_role`(`id`,`create_by`,`create_time`,`del_flag`,`update_by`,`update_time`,`role_id`,`user_id`) values ('40679199995858945',NULL,'2018-08-11 20:16:58',0,NULL,'2018-08-11 20:16:58','496138616573952','682265633886208');
+
+/*Table structure for table `chunk` */
+
+CREATE TABLE `chunk` (
+  `id` bigint(20) NOT NULL,
+  `chunk_number` int(11) NOT NULL,
+  `chunk_size` bigint(20) NOT NULL,
+  `current_chunk_size` bigint(20) NOT NULL,
+  `filename` varchar(255) NOT NULL,
+  `identifier` varchar(255) NOT NULL,
+  `relative_path` varchar(255) NOT NULL,
+  `total_chunks` int(11) NOT NULL,
+  `total_size` bigint(20) NOT NULL,
+  `type` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='分片记录';
+
+/*Data for the table `chunk` */
+
+/*Table structure for table `file_info` */
+
+DROP TABLE IF EXISTS `file_info`;
+
+CREATE TABLE `file_info` (
+  `id` bigint(20) NOT NULL,
+  `filename` varchar(255) NOT NULL,
+  `identifier` varchar(255) NOT NULL,
+  `location` varchar(255) NOT NULL,
+  `total_size` bigint(20) NOT NULL,
+  `type` varchar(255) NOT NULL,
+  PRIMARY KEY (`id`)
+)  ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='文件表';
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
 /*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;

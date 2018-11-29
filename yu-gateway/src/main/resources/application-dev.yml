@@ -11,7 +11,7 @@ spring:
     timeout: 3000
     sentinel:
       master: mymaster
-      nodes: xx.xx.xx.xx:26379
+      nodes: 192.168.31.166:26379
     jedis:
       pool:
         max-active: 5000 #最大连接数

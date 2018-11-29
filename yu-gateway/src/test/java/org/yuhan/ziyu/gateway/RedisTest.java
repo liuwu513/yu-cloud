@@ -7,7 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.test.context.junit4.SpringRunner;
-import org.yuhan.ziyu.base.authserver.PermissionDto;
+import org.yuhan.ziyu.base.authserver.dto.PermissionDto;
 import org.yuhan.ziyu.base.common.AuthConstant;
 
 import java.util.List;
