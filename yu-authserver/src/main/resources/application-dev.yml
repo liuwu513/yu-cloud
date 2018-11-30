@@ -27,15 +27,6 @@ spring:
         allow:
         # IP黑名单
         deny:
-  http:
-    servlet:
-      multipart:
-        enabled: true   # 启用http上传处理
-        max-file-size: 100MB # 设置单个文件的最大长度
-        max-request-size: 100MB # 设置最大的请求文件的大小
-        file-size-threshold: 1MB  # 当上传文件达到1MB的时候进行磁盘写入
-        location: /tmp  # 上传的临时目录
-
   jpa:
     show-sql: true
     # 自动生成表结构
@@ -44,28 +35,37 @@ spring:
       ddl-auto: none
 
   redis:
-    database: 15
-    password: admin123456
-    timeout: 3000
-    sentinel:
-      master: mymaster
-      nodes: 192.168.31.166:26379
-    jedis:
-      pool:
-        max-active: 5000 #最大连接数
-        max-idle: 30 #最大空闲连接数
-        min-idle: 5 #最小空闲连接数
-        max-wait: 3000  #获取连接最大等待时间 ms  #default -1
+      database: 15
+      password: admin123456
+      timeout: 3000
+      sentinel:
+        master: mymaster
+        nodes: 192.168.31.166:26379
+      jedis:
+        pool:
+          max-active: 5000 #最大连接数
+          max-idle: 30 #最大空闲连接数
+          min-idle: 5 #最小空闲连接数
+          max-wait: 3000  #获取连接最大等待时间 ms  #default -1
+
+  # mongodb 配置
+  data:
+    mongodb:
+      host: 10.15.51.44
+      port: 27017
+      username:
+      password:
+
+  servlet:
+    multipart:
+      max-file-size: 20MB       # 设置单个文件的最大长度
+      max-request-size: 20MB    # 设置最大的请求文件的大小
+      file-size-threshold: 2MB  # 当上传文件达到2MB的时候进行磁盘写入
 
   # 定时任务
   quartz:
     # 任务信息存储至数据库
     job-store-type: jdbc
-  # 文件大小上传配置
-  servlet:
-    multipart:
-      max-file-size: 5Mb
-      max-request-size: 5Mb
 
 # 配置文件加密key
 jasypt:

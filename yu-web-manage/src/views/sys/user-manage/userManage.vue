@@ -429,7 +429,7 @@ export default {
         {
           title: "上传头像",
           key: "icon",
-          width: 350,
+          width: 400,
           render: (h, params) => {
             return h(uploaderSingle,{
                 props: {
@@ -442,10 +442,10 @@ export default {
                 },
                 on: {
                     fileComplete: () => {
-
+                        this.fileComplete();
                     },
                     complete: ()=>{
-
+                        this.complete();
                     }
                 }
             });
